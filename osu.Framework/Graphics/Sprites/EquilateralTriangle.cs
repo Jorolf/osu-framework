@@ -8,7 +8,7 @@ namespace osu.Framework.Graphics.Sprites
     /// <summary>
     /// A triangle which has all side lengths and angles equal.
     /// </summary>
-    public class EquilateralTriangle : Triangle
+    public class EquilateralTriangle : Polygon
     {
         /// <summary>
         /// For equilateral triangles, height = cos(30) * sidelength = ~0.866 * sidelength.

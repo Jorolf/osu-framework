@@ -148,7 +148,7 @@
     <Compile Include="Graphics\Sprites\Box.cs" />
     <Compile Include="Graphics\OpenGL\Textures\TextureGLAtlas.cs" />
     <Compile Include="Graphics\OpenGL\Textures\TextureGLAtlasWhite.cs" />
-    <Compile Include="Graphics\Sprites\Triangle.cs" />
+    <Compile Include="Graphics\Sprites\Polygon.cs" />
     <Compile Include="Graphics\Transforms\TransformEdgeEffectAlpha.cs" />
     <Compile Include="Graphics\Transforms\TransformSize.cs" />
     <Compile Include="Graphics\UserInterface\BasicSliderBar.cs" />
