@@ -1,0 +1,2 @@
+﻿en-gb=English - United Kingdom
+en-us=English - United States

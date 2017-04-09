@@ -73,13 +73,13 @@ namespace osu.Framework.VisualTests.Tests
 
         private void toggleDropdownViaClick(StyledDropdownMenu dropdown) => dropdown.Children.First().TriggerClick();
 
-        private class StyledDropdownMenu : Dropdown<string>
+        internal class StyledDropdownMenu : Dropdown<string>
         {
             protected override Menu CreateMenu() => new Menu();
 
             protected override DropdownHeader CreateHeader() => new StyledDropdownHeader();
 
-            protected override DropdownMenuItem<string> CreateMenuItem(string key, string value) => new StyledDropdownMenuItem(key);
+            protected override DropdownMenuItem<string> CreateMenuItem(string key, string value) => new StyledDropdownMenuItem(key, value);
 
             public StyledDropdownMenu()
             {
@@ -112,8 +112,8 @@ namespace osu.Framework.VisualTests.Tests
 
         private class StyledDropdownMenuItem : DropdownMenuItem<string>
         {
-            public StyledDropdownMenuItem(string text)
-                : base(text, text)
+            public StyledDropdownMenuItem(string text, string value)
+                : base(text, value)
             {
                 AutoSizeAxes = Axes.Y;
                 Foreground.Padding = new MarginPadding(2);

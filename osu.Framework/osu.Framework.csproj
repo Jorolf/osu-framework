@@ -192,6 +192,7 @@
     <Compile Include="IO\Network\JsonWebRequest.cs" />
     <Compile Include="IO\Network\UrlEncoding.cs" />
     <Compile Include="IO\Network\WebRequest.cs" />
+    <Compile Include="IO\Stores\LocaleStore.cs" />
     <Compile Include="IO\Stores\OnlineStore.cs" />
     <Compile Include="IStateful.cs" />
     <Compile Include="Lists\SortedList.cs" />
@@ -321,6 +322,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Fonts\LICENSE.txt" />
+    <EmbeddedResource Include="Resources\Localisation\en-gb.txt" />
+    <EmbeddedResource Include="Resources\Localisation\en-us.txt" />
+    <EmbeddedResource Include="Resources\Localisation\locales.txt" />
     <EmbeddedResource Include="Resources\Textures\sample-texture.png" />
     <EmbeddedResource Include="Resources\Shaders\sh_Utils.h" />
     <EmbeddedResource Include="Resources\Shaders\sh_Texture.fs" />

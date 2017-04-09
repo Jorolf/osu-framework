@@ -83,6 +83,8 @@ namespace osu.Framework.Graphics.Sprites
 
         private TextureStore store;
 
+        private LocaleStore locale;
+
         public override bool HandleInput => false;
 
         public SpriteText()
@@ -109,9 +111,11 @@ namespace osu.Framework.Graphics.Sprites
         }
 
         [BackgroundDependencyLoader]
-        private void load(FontStore store)
+        private void load(FontStore store, LocaleStore locale)
         {
             this.store = store;
+            this.locale = locale;
+            locale.Locale.ValueChanged += newValue => Localisation = Localisation;
 
             spaceWidth = CreateCharacterDrawable('.')?.DrawWidth * 2 ?? default_text_size;
 
@@ -130,10 +134,23 @@ namespace osu.Framework.Graphics.Sprites
             get { return text; }
             set
             {
+                if (!string.IsNullOrEmpty(Localisation)) throw new InvalidOperationException($"Text shouldn't be changed while the {nameof(SpriteText)} is localised");
                 if (text == value)
                     return;
 
                 text = value ?? string.Empty;
+                internalSize.Invalidate();
+            }
+        }
+
+        private string localisation = string.Empty;
+        public string Localisation
+        {
+            get { return localisation; }
+            set
+            {
+                localisation = value;
+                text = locale?.Get(localisation);
                 internalSize.Invalidate();
             }
         }

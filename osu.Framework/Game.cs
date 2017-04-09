@@ -45,6 +45,8 @@ namespace osu.Framework
 
         public FontStore Fonts;
 
+        public LocaleStore Locales;
+
         private readonly Container content;
         private PerformanceOverlay performanceContainer;
         internal DrawVisualiser DrawVisualiser;
@@ -135,6 +137,8 @@ namespace osu.Framework
                 ScaleAdjust = 100
             };
             Dependencies.Cache(Fonts);
+
+            Dependencies.Cache(Locales = new LocaleStore(Resources, locale => $@"Localisation/{locale}.txt"));
         }
 
         protected override void LoadComplete()
