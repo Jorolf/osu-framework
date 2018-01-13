@@ -2,16 +2,15 @@
 // Licensed under the MIT Licence - https://raw.githubusercontent.com/ppy/osu-framework/master/LICENCE
 
 using System;
+using System.IO;
 
 namespace osu.Framework.Platform.Windows
 {
     public class WindowsStorage : DesktopStorage
     {
-        public WindowsStorage(string baseName)
-            : base(baseName)
+        public WindowsStorage(string basePath)
+            : base(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), basePath))
         {
         }
-
-        protected override string LocateBasePath() => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
     }
 }

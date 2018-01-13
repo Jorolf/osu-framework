@@ -8,12 +8,12 @@ namespace osu.Framework.Platform.MacOS
 {
     public class MacOSStorage : DesktopStorage
     {
-        public MacOSStorage(string baseName)
-            : base(baseName)
+        public MacOSStorage(string basePath)
+            : base(Path.Combine(LocateBasePath(), basePath))
         {
         }
 
-        protected override string LocateBasePath()
+        protected static string LocateBasePath()
         {
             string home = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string xdg = Environment.GetEnvironmentVariable("XDG_DATA_HOME");

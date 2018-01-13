@@ -3,35 +3,22 @@
 
 using System;
 using System.IO;
-using osu.Framework.IO.File;
 
 namespace osu.Framework.Platform
 {
     public abstract class Storage
     {
-        protected string BaseName { get; set; }
-
         protected readonly string BasePath;
 
         /// <summary>
-        /// An optional path to be added after <see cref="BaseName"/>.
+        /// An optional path to be added after <see cref="BasePath"/>.
         /// </summary>
         protected string SubDirectory { get; set; } = string.Empty;
 
-        protected Storage(string baseName)
+        protected Storage(string basePath)
         {
-            BaseName = FileSafety.FilenameStrip(baseName);
-            BasePath = LocateBasePath();
-            if (BasePath == null)
-                throw new NullReferenceException(nameof(BasePath));
+            BasePath = basePath ?? throw new ArgumentNullException(nameof(basePath));
         }
-
-        /// <summary>
-        /// Find the location which will be used as a root for this storage.
-        /// This should usually be a platform-specific implementation.
-        /// </summary>
-        /// <returns></returns>
-        protected abstract string LocateBasePath();
 
         /// <summary>
         /// Get a Storage-usable path for the provided path.
@@ -41,7 +28,7 @@ namespace osu.Framework.Platform
         /// <returns></returns>
         protected string GetUsablePathFor(string path, bool createIfNotExisting = false)
         {
-            var resolvedPath = Path.Combine(BasePath, BaseName, SubDirectory, path);
+            var resolvedPath = Path.Combine(BasePath, SubDirectory, path);
             if (createIfNotExisting) Directory.CreateDirectory(Path.GetDirectoryName(resolvedPath));
             return resolvedPath;
         }

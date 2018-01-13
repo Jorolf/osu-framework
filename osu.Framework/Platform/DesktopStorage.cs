@@ -10,12 +10,10 @@ namespace osu.Framework.Platform
 {
     public class DesktopStorage : Storage
     {
-        public DesktopStorage(string baseName)
-            : base(baseName)
+        public DesktopStorage(string basePath)
+            : base(basePath)
         {
         }
-
-        protected override string LocateBasePath() => @"./"; //use current directory by default
 
         public override bool Exists(string path) => File.Exists(GetUsablePathFor(path));
 
