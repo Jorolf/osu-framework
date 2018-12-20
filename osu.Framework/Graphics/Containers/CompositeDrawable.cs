@@ -1428,6 +1428,8 @@ namespace osu.Framework.Graphics.Containers
             }
         }
 
+        private Cached childrenSizeDependencies = new Cached();
+
         /// <summary>
         /// The duration which automatic sizing should take. If zero, then it is instantaneous.
         /// Otherwise, this is equivalent to applying an automatic size via a resize transform.
@@ -1445,7 +1447,27 @@ namespace osu.Framework.Graphics.Containers
         /// </summary>
         internal event Action OnAutoSize;
 
-        private Cached childrenSizeDependencies = new Cached();
+        private Vector2 minimumAutoSize = Vector2.Zero;
+
+        /// <summary>
+        /// Prevents this <see cref="CompositeDrawable"/> from getting smaller than <see cref="MinimumAutoSize"/> through auto sizing.
+        /// Does not account for <see cref="Padding"/> and only works for auto sized axes (<see cref="AutoSizeAxes"/>).
+        /// </summary>
+        public Vector2 MinimumAutoSize
+        {
+            get => minimumAutoSize;
+            set
+            {
+                if (minimumAutoSize == value) return;
+
+                if (AutoSizeAxes == Axes.None)
+                    throw new InvalidOperationException($"{nameof(MinimumAutoSize)} only works when {nameof(AutoSizeAxes)} is set.");
+
+                minimumAutoSize = value;
+                childrenSizeDependencies.Invalidate();
+                OnSizingChanged();
+            }
+        }
 
         public override float Width
         {
@@ -1512,7 +1534,7 @@ namespace osu.Framework.Graphics.Containers
 
                 if (AutoSizeAxes == Axes.None) return DrawSize;
 
-                Vector2 maxBoundSize = Vector2.Zero;
+                Vector2 maxBoundSize = MinimumAutoSize;
 
                 // Find the maximum width/height of children
                 foreach (Drawable c in aliveInternalChildren)

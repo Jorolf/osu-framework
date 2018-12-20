@@ -37,7 +37,8 @@ namespace osu.Framework.Tests.Visual
                 @"Inner Margin",
                 @"Drawable Margin",
                 @"Relative Inside Autosize",
-                @"Negative sizing"
+                @"Negative sizing",
+                @"AutoSize with minimum size"
             };
 
             for (int i = 0; i < testNames.Length; i++)
@@ -1001,6 +1002,26 @@ namespace osu.Framework.Tests.Visual
                                 }
                             }
                         });
+
+                        break;
+                    }
+                case 14:
+                    {
+                        InfofulBoxAutoSize container;
+                        testContainer.Add(container = new InfofulBoxAutoSize
+                        {
+                            MinimumAutoSize = new Vector2(200),
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Child = new InfofulBox
+                            {
+                                Size = new Vector2(100),
+                                Origin = Anchor.Centre,
+                                Anchor = Anchor.Centre,
+                                Colour = Color4.DarkSeaGreen,
+                            }
+                        });
+                        addCornerMarkers(container, 20);
 
                         break;
                     }
